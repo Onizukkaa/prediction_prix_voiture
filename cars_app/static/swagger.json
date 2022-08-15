@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Autoccas",
+    "version": "1.0.0",
+    "title": "Autoccas Cars Price Predictions Service",
+    "contact": {
+      "email": "DevonIA@gmail.com"
+    },
+    "license": {
+      "name": "DevonIA",
+    }
+  },
+   "paths": {
+    "/graphs": {
+      "get": {
+        "tags": [
+          "Graph Request"
+        ],
+        "summary": "Returns graph according to request value",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/graphRequests"
+            }
+          }
+        }
+      },
+    },
+    "/predictions": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the car that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Prediction Request"
+        ],
+        "summary": "Get prediction request with given values",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Car Request id",
+            "schema": {
+              "$ref": "#/components/schemas/predictions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/predictions"
+            }
+          },
+          "400": {
+            "description": "Failed. Misunderstood Request."
+          },
+          "404": {
+            "description": "Failed. Prediction request not found."
+          }
+        }
+      }
+    },
+  "components": {
+    "schemas": {
+      "id": {
+        "properties": {
+          "uuid": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
+}
